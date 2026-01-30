@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Lawrence | Singularity</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= THE SINGULARITY THEME ================= */
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000; /* Deep space */
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Cosmic Background with a Black Hole "Void" in the center */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transform: scale(1.2); /* Zoom out effect on entry */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
+  pointer-events: none;
+  background: radial-gradient(circle at center, #111 0%, #050505 40%, #000 100%);
+}
+
+.screen::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Subtle star dust */
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.screen.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.screen.left {
+  transform: scale(0.8); /* Pulling into the void */
+  opacity: 0;
+}
+
+/* ================= CONTENT ================= */
+.content {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 10;
+}
+
+@media (min-width: 900px) {
+  .content { max-width: 720px; }
+}
+
+/* ================= PROFILE (The Event Horizon) ================= */
+.profile {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 
+              0 0 50px rgba(255, 180, 0, 0.2); /* Accretion disk glow */
+  animation: orbit 4s linear infinite;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+}
+
+/* ================= TEXT & ACCENTS ================= */
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #eee;
+}
+
+.hero-reality {
+  font-size: 5rem;
+  font-weight: 800;
+  display: block;
+  text-transform: uppercase;
+  /* Event Horizon Color Palette */
+  background: linear-gradient(to bottom, #fff 20%, #ffaa00 50%, #663300 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 170, 0, 0.4));
+  letter-spacing: 2px;
+}
+
+.divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffaa00, transparent);
+  margin: 20px auto;
+}
+
+.hero-intro {
+  font-size: 1rem;
+  opacity: 0.7;
+  max-width: 450px;
+  margin: 0 auto;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+}
+
+.hero-intro b { color: #ffaa00; font-weight: 600; }
+
+/* ================= NAV BAR (Floating) ================= */
+.nav {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 15px 25px;
+  border-radius: 100px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav i { font-size: 1.5rem; margin-bottom: 4px; }
+.nav button.active { color: #ffaa00; text-shadow: 0 0 10px #ffaa00; }
+
+/* ================= BUTTON ================= */
+.button {
+  display: inline-block;
+  margin-top: 35px;
+  padding: 12px 35px;
+  border-radius: 2px; /* Sharp technical look */
+  background: transparent;
+  color: #ffaa00;
+  border: 1px solid #ffaa00;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #ffaa00;
+  color: #000;
+  box-shadow: 0 0 30px rgba(255, 170, 0, 0.5);
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes orbit {
+  0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), -5px 0 30px rgba(255, 170, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 5px 0 50px rgba(255, 170, 0, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), -5px 0 30px rgba(255, 170, 0, 0.3); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen home active" id="home">
+  <div class="content">
+    <h1 class="hero-title">
+      Compressing Ideas into<br>
+      <span class="hero-reality">Singularity</span>
+    </h1>
+    
+    <div class="divider"></div>
+
+    <p class="hero-intro">
+      Hi! 👋 I'm <b>Lawrence Cabantug</b>. <br>
+      A Software Developer crafting high-gravity digital experiences that pull users in.
+    </p>
+
+    <a href="#" class="button" onclick="go(3,'projects',document.querySelectorAll('.nav button')[3])">Explore the Void</a>
+  </div>
+</div>
+
+<div class="screen about" id="about">
+  <div class="content">
+    <div class="profile">
+      <img src="/1769785018800.png" alt="Lawrence Cabantug">
+    </div>
+    <h2 style="color:#ffaa00; text-transform: uppercase; letter-spacing: 3px;">The Origin</h2>
+    <p style="max-width: 500px; margin: 0 auto; opacity: 0.8;">I build clean, responsive, and modern web architectures from the dark matter of code.</p>
+  </div>
+</div>
+
+<div class="screen skills" id="skills">
+  <div class="content">
+    <h2 style="color:#ffaa00;">Core Powers</h2>
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:20px; flex-wrap:wrap;">
+        <span style="border:1px solid #444; padding:8px 20px; border-radius:100px;">Python</span>
+        <span style="border:1px solid #444; padding:8px 20px; border-radius:100px;">Java/JavaScript</span>
+        <span style="border:1px solid #444; padding:8px 20px; border-radius:100px;">Html/Css</span>
+    </div>
+  </div>
+</div>
+
+<div class="screen projects" id="projects">
+  <div class="content">
+    <h2 style="color:#ffaa00;">Artifacts</h2>
+    <div style="background:rgba(255,255,255,0.05); padding:20px; border: 1px solid #222; margin-top:20px;">Project: Quantum Portfolio</div>
+  </div>
+</div>
+
+<div class="screen contact" id="contact">
+  <div class="content">
+    <h2 style="color:#ffaa00;">Transmit</h2>
+    <p>Reach out through the void</p>
+    <a class="button" href="mailto:your@email.com">Send Message</a>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="go(0,'home',this)"><i class='bx bxs-circle'></i>Home</button>
+  <button onclick="go(1,'about',this)"><i class='bx bxs-user-circle'></i>About</button>
+  <button onclick="go(2,'skills',this)"><i class='bx bxs-component'></i>Skills</button>
+  <button onclick="go(3,'projects',this)"><i class='bx bxs-layer'></i>Works</button>
+  <button onclick="go(4,'contact',this)"><i class='bx bxs-terminal'></i>Contact</button>
+</div>
+
+<script>
+const screens = document.querySelectorAll('.screen');
+
+function go(index, id, btn) {
+  screens.forEach((s, i) => {
+    s.classList.remove('active', 'left');
+    if (i < index) s.classList.add('left');
+  });
+
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
